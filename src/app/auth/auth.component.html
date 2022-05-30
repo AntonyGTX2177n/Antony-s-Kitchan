@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <div class="alert alert-danger" *ngIf="error">
+      <p><span class="btn btn-danger" (click)="errorButton()">x</span> {{ error }}</p>
+    </div>
+    <div *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+      <div>
+        <h2 class="h4">Sign-Up to Continue</h2>
+      </div>
+      <hr>
+      <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          ngModel
+          name="email"
+          required
+          email
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          ngModel
+          name="password"
+          required
+          minlength="6"
+        />
+      </div>
+      <div>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!authForm.valid"
+        >
+          {{ isLoginMode ? 'Login' : 'Sign Up' }}
+        </button>
+      </div>
+      <hr>
+      <div>
+        <button class="btn btn-primary" (click)="onSwitchMode()" type="button">
+          Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<style>
+  .btn-primary {
+    border-radius: 8px;
+    width: 150px;
+    box-shadow: 4px 4px 4px blue;
+}
+
+input {
+    border-radius: 10px;
+    width: 300px;
+}
+
+form {
+    background-color: rgba(0, 0, 255, 0.205);
+    padding: 14px;
+    box-shadow: 4px 4px 4px blue;
+}
+
+.h4 {
+    color: rgb(15, 15, 190);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.active {
+    background-color: blue;
+    color: white;
+}
+
+.alert-danger {
+    background-color: rgba(255, 255, 0, 0.384);
+    border: 2px solid  red;
+    color: red;
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.btn-danger {
+    margin-right: 10px;
+}
+</style>
